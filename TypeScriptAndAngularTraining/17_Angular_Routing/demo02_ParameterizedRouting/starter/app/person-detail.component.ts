@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Person} from './person';
+import { ActivatedRoute, Params } from '@angular/router';
+import { PersonDataService } from './person-data.service';
 
 @Component(
     {
@@ -16,11 +18,22 @@ import {Person} from './person';
            <div>
              Github: {{person.githubaccount}}  
            </div>
-        </div>`
+        </div>
+        <a href="/persons">back</a>`
+        // TODO richtiger link (router)
     }
 )
-export class PersonDetailComponent
+export class PersonDetailComponent implements OnInit
 {
-    @Input()
+  constructor(private _route: ActivatedRoute, private _dataService: PersonDataService) {}
+
+  ngOnInit(){
+    this._route.params.forEach((p: Params) => {
+      let personId = +p['id'];
+      this.person = this._dataService.getPersonById(personId);
+    });
+  }
+  
+  @Input()
     person:Person;
 }
