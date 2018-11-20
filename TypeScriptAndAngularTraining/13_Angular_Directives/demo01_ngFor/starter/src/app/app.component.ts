@@ -4,7 +4,13 @@ import { Person } from './person';
 @Component({
   selector: 'app-root',
   template: `<h1>Number of Persons {{persons.length}}</h1>
-           TODO: Create a table and fill it with the persons and "ngFor"-directive
+          <table>
+          <tr *ngFor="let person of persons">
+          <td>{{person.firstname}}</td>
+          <td>{{person.lastname}}</td>
+          <td>{{person.githubaccount}}</td>
+          </tr>
+          </table>
             `
 })
 export class AppComponent {

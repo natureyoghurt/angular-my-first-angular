@@ -16,14 +16,15 @@ import { Person } from './person';
                <td>{{person.githubaccount}}</td>
              </tr>
            </table>
-           <div>
-             <label for="firstname" >Selected Person</label>
-             <input id="firstname" type="text" />
+           <div *ngIf="selectedPerson;else loading">
+           Selected Person:
+             <label for="firstname" >Firstname: </label>
+             <input id="firstname" type="text" [(ngModel)]="selectedPerson.firstname" />
            </div>
-           <div>
-             Display the div above with the firstname-input only if a person is selected. Use "ngIf" to do this!
-             And bind the firstname input to the selected person's firstname property two-way with ngModel
+           <div *ngIf="selectedPerson?.firstname === 'Thomas'">
+             You've selected a Thomas in the list. ;-D
            </div>
+           <ng-template #loading>please select a person</ng-template>
             `
 })
 export class AppComponent {
