@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../person';
+import { PersonDataService } from '../person-data.service';
 
 @Component({
   selector: 'app-person-list',
@@ -18,29 +19,21 @@ import { Person } from '../person';
     <td>{{person.lastname}}</td>
     <td>{{person.githubaccount}}</td>
   </tr>
-</table>`
+</table>`,
+providers: [PersonDataService]
 }
 )
-export class PersonListComponent {
-  persons: Person[] = PERSONS;
+export class PersonListComponent implements OnInit {
+  persons: Person[];
   selectedPerson: Person;
+
+  constructor(private personDataService: PersonDataService) {}
+
+  ngOnInit() {
+    this.persons = this.personDataService.loadPersons();
+  }
 
   onPersonClick(person: Person) {
     this.selectedPerson = person;
   }
-
-  onRemove(person: Person) {
-    const index = this.persons.indexOf(person);
-    if (index > -1) {
-      this.persons.splice(index, 1);
-    }
-  }
 }
-
-const PERSONS: Person[] = [
-  { firstname: 'Silvester', lastname: 'Stallone' },
-  { firstname: 'Thomas', lastname: 'Bandixen', githubaccount: 'tbandixen' },
-  { firstname: 'Thomas', lastname: 'Gassmann', githubaccount: 'gassmannT' },
-  { firstname: 'Thomas', lastname: 'Huber', githubaccount: 'thomasclaudiushuber' },
-  { firstname: 'Bruce', lastname: 'Willis' },
-  { firstname: 'Lara', lastname: 'Croft' }];
