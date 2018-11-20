@@ -26,7 +26,9 @@ export class PersonListComponent implements OnInit {
   constructor(private _personDataService: PersonDataService) { }
 
   ngOnInit() {
-    this.persons = this._personDataService.loadPersons();
+    this._personDataService.loadPersons()
+    .subscribe(p => this.persons = p,
+      error => alert(error));
   }
 
   onPersonClick(person: Person) {

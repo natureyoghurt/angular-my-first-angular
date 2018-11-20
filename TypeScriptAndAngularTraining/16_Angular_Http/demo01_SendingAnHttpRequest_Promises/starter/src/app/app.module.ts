@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
 import { PersonListComponent } from './person-list/person-list.component';
@@ -13,7 +14,7 @@ import { PersonListComponent } from './person-list/person-list.component';
     PersonListComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, FormsModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
